@@ -1,19 +1,31 @@
-// require in express from it's Node module
-// express is a function, but you wouldn't just know that by looking at it...
+let quotes = [
+    {text: `I'm a quote!`, author: `Jake` },
+    {text: `I'm another quote!`, author: `Jake T`}
+];
+
+// let quotes = [`I'm a quote!`, `I'm another quote!`]
 
 const express = require( 'express' );
-
 const app = express();
-// this gies us back an expres app - it's an object
 
 app.use( express.static( 'server/public' ));
-// tell express where to look for files when getting a request from someone's browser
-// server can look ONLY   ^^^^here^^^^
 
-// start listening for requests - can be any random port...as long as it's not already being used
 const port = 5000;
 app.listen( port, function(){
     console.log( `listening on port ${port}`)
-});
+}); //server up!
+
+//get route
+app.get( '/quotes', ( req, res )=>{
+    console.log( 'in GET hit for /quotes route' );
+    res.send( quotes );
+}); //end quotes GET
+
+// //post route for stretch goal
+// app.post( '/quotes', (req, res)=>{
+//     console.log( 'in POST hit for /quotes route:', req.body );
+//     quotes.push( req.body.name );
+//     res.sendStatus(200);
+// })
 
 
